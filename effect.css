@@ -27,3 +27,6 @@ body.sqs-edit-mode-active .rdx-pop{display:none}
 .rolodex.rdx-front .rdx-card{transform:none!important}
 .rolodex .rdx-card.rdx-hide .rdx-t{visibility:hidden}
 body.sqs-edit-mode-active .rdx-front{display:none!important}
+/* titles that may break onto two lines (data-wrap="on") */
+.rolodex.rdx-wrap .rdx-card{white-space:normal}
+.rolodex.rdx-wrap .rdx-t{white-space:normal;width:max-content;max-width:var(--rdx-tw,90vw);text-align:center;line-height:var(--rdx-lh,.92);flex-shrink:0;text-wrap:balance}

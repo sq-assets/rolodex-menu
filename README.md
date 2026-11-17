@@ -14,11 +14,11 @@ Or use `data-collections="/a,/b,/c"` to show one title per collection, with all 
 Paste into **Pages → Website Tools → Code Injection → Footer**:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.5.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.5.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.6.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.6.0/effect.js"></script>
 ```
 
-This loads a fixed version (`@v1.5.0`), so the script and styles always match. To use a newer version, change the number in both lines to the latest tag under **Releases / Tags**. `@main` also works, but jsDelivr can take up to 12 hours to pick up changes to it, and may briefly serve a mismatched script and style file.
+This loads a fixed version (`@v1.6.0`), so the script and styles always match. To use a newer version, change the number in both lines to the latest tag under **Releases / Tags**. `@main` also works, but jsDelivr can take up to 12 hours to pick up changes to it, and may briefly serve a mismatched script and style file.
 
 ### Code Block
 
@@ -89,9 +89,12 @@ Leave out any setting to use its default.
 | `data-font-url` | Link to an uploaded font file (then `data-font-name` is just its name) |
 | `data-font-weight` | `100`–`900` |
 | `data-uppercase` | `on` (default) or `off` |
+| `data-wrap` | `on` = long titles break onto more lines, so all the titles can be bigger. Each row is only as tall as its own title, so one-line titles stay close together |
+| `data-wrap-lines` / `data-wrap-lines-mobile` | Most lines a title may use (default 2 on desktop, 3 on phones) |
+| `data-text-size-mobile` | Title size on phones (default: same as `data-text-size`) |
 | `data-fit` | `on` (default) = titles shrink so the longest one, plus its hover grow, fits the screen. `data-text-size` is then the largest they get. `off` = always use `data-text-size` |
 | `data-fit-width` | How much of the width the longest title may use, in % (default 92) |
-| `data-row-height` | Height of each row in px (default 130). Lower = closer together |
+| `data-row-height` | Height of each row in px (default 130). Lower = closer together. Not used when `data-wrap` is on |
 | `data-spacing` | Extra gap between rows in px (default 30) |
 
 **Hovered title**
@@ -117,6 +120,7 @@ Leave out any setting to use its default.
 | `data-swap` | Seconds between new images when a collection has more than fit |
 | `data-gap` | Random only: minimum space between images in px |
 | `data-images-front` | `on` = the photos cover every title except the one being hovered, which stays on top. Default `off` (photos sit behind all the titles) |
+| `data-image-size-mobile` / `data-image-size-max-mobile` | Image widths on phones in px (default about half the screen width) |
 | `data-image-link` | `on` = clicking an image opens the same post as its title. Default `off` |
 | `data-image-link-target` | `new` = open in a new tab. Default: same tab |
 
@@ -127,6 +131,9 @@ Leave out any setting to use its default.
 | `data-spin` | Auto-spin speed (`0` = off, `3` = three times faster) |
 | `data-scroll-spin` | How much scrolling the page spins it (`0` = off) |
 | `data-drag` | `on` / `off`: drag to spin |
+| `data-autoplay-mobile` | `on` (default) = on phones the drum stops on each title in turn, lights it up with its images, then moves on. Swipe left or right to skip; tap to open. `off` = phones just spin |
+| `data-autoplay-hold` | Seconds each title stays lit on phones (default 2.6) |
+| `data-height-mobile` | Height on phones in px (default: same as `data-height`) |
 | `data-hit-width` | How much of the width, in the middle, picks up hovers and clicks (default `50` = middle 50%). The sides stay free so the drum keeps spinning |
 
 ### Corner text (optional)
@@ -140,5 +147,4 @@ Add to the same Code Block, after the `div`:
 ```
 
 ### Notes
-- Phones have no hover, so on mobile the titles spin and open their post when tapped.
 - The images step aside while you're in Edit mode.
