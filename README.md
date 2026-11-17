@@ -14,11 +14,11 @@ Or use `data-collections="/a,/b,/c"` to show one title per collection, with all 
 Paste into **Pages → Website Tools → Code Injection → Footer**:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.3.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.3.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.4.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.4.0/effect.js"></script>
 ```
 
-This loads a fixed version (`@v1.3.0`), so the script and styles always match. To use a newer version, change the number in both lines to the latest tag under **Releases / Tags**. `@main` also works, but jsDelivr can take up to 12 hours to pick up changes to it, and may briefly serve a mismatched script and style file.
+This loads a fixed version (`@v1.4.0`), so the script and styles always match. To use a newer version, change the number in both lines to the latest tag under **Releases / Tags**. `@main` also works, but jsDelivr can take up to 12 hours to pick up changes to it, and may briefly serve a mismatched script and style file.
 
 ### Code Block
 

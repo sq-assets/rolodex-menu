@@ -35,7 +35,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
     const drum=document.createElement('nav');drum.className='rdx-drum';drum.setAttribute('aria-label',ds.label||'Menu');el.appendChild(drum);
     cards.forEach((c,i)=>{const a=document.createElement('a');a.className='rdx-card';a.href=c.url;a.draggable=false;a.c=c;
       if(i>=list.length){a.setAttribute('aria-hidden','true');a.tabIndex=-1}
-      const t=document.createElement('span');t.className='rdx-t';t.textContent=c.title;a.append(t);
+      const t=document.createElement('span');t.className='rdx-t';t.textContent=c.title;t.dataset.text=c.title;a.append(t);
       a.style.transform='rotateX('+(-i*step)+'deg) translateZ('+r+'px)';drum.appendChild(a);c.imgs.slice(0,COUNT).forEach(s=>new Image().src=s)});
     /* fit: shrink the titles so the longest one (including its hover grow) fits the width; data-text-size is the maximum */
     const fit=()=>{if((ds.fit||'on')==='off')return;el.style.removeProperty('--rdx-fit');const ts=[...drum.querySelectorAll('.rdx-t')],wid=Math.max(...ts.map(t=>t.offsetWidth)),fs=parseFloat(getComputedStyle(ts[0]).fontSize),room=el.clientWidth*num(ds.fitWidth,92)/100/num(ds.grow,1.15);if(wid>room)el.style.setProperty('--rdx-fit',Math.floor(fs*room/wid)+'px')};
