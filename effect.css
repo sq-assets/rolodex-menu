@@ -18,3 +18,4 @@
 .rdx-c.tl{top:20px;left:20px}.rdx-c.tr{top:20px;right:20px}.rdx-c.bl{bottom:20px;left:20px}.rdx-c.br{bottom:20px;right:20px}
 body.sqs-edit-mode-active .rdx-pop{display:none}
 .rolodex.rdx-over-pop{cursor:pointer}
+.rolodex.rdx-glow .rdx-card.on .rdx-t{text-shadow:0 0 calc(var(--rdx-glow-size,24px)*.35) var(--rdx-glow-color,var(--rdx-active,#E8A6D6)),0 0 var(--rdx-glow-size,24px) var(--rdx-glow-color,var(--rdx-active,#E8A6D6)),0 0 calc(var(--rdx-glow-size,24px)*2) var(--rdx-glow-color,var(--rdx-active,#E8A6D6))}

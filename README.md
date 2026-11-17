@@ -44,6 +44,9 @@ Put this in a Code Block in the section where you want the rolodex:
   data-active-font-url=""
   data-active-italic="off"
   data-grow="1.3"
+  data-glow="on"
+  data-glow-color="#E8A6D6"
+  data-glow-size="24"
 
   data-images="3"
   data-image-position="random"
@@ -95,6 +98,9 @@ Leave out any setting to use its default.
 | `data-active-font-name` / `data-active-font-url` / `data-active-font-weight` | Switch to a different font on hover |
 | `data-active-italic` | `on` = italic on hover |
 | `data-grow` | How much it grows (`1.3` = 30% bigger) |
+| `data-glow` | `on` = a soft glow around the hovered title |
+| `data-glow-color` | Glow colour (default: the hover colour) |
+| `data-glow-size` | How far the glow spreads, in px (default 24) |
 
 **Images**
 | Setting | What it does |
