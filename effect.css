@@ -19,3 +19,4 @@
 body.sqs-edit-mode-active .rdx-pop{display:none}
 .rolodex.rdx-over-pop{cursor:pointer}
 .rolodex.rdx-glow .rdx-card.on .rdx-t{text-shadow:0 0 calc(var(--rdx-glow-size,24px)*.35) var(--rdx-glow-color,var(--rdx-active,#E8A6D6)),0 0 var(--rdx-glow-size,24px) var(--rdx-glow-color,var(--rdx-active,#E8A6D6)),0 0 calc(var(--rdx-glow-size,24px)*2) var(--rdx-glow-color,var(--rdx-active,#E8A6D6))}
+.rolodex .rdx-card.on .rdx-t{-webkit-text-stroke:var(--rdx-outline,0) var(--rdx-outline-color,#111);paint-order:stroke fill}
