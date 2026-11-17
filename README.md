@@ -14,11 +14,11 @@ Or use `data-collections="/a,/b,/c"` to show one title per collection, with all 
 Paste into **Pages → Website Tools → Code Injection → Footer**:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.4.0/effect.css">
-<script src="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.4.0/effect.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.5.0/effect.css">
+<script src="https://cdn.jsdelivr.net/gh/sq-assets/rolodex-menu@v1.5.0/effect.js"></script>
 ```
 
-This loads a fixed version (`@v1.4.0`), so the script and styles always match. To use a newer version, change the number in both lines to the latest tag under **Releases / Tags**. `@main` also works, but jsDelivr can take up to 12 hours to pick up changes to it, and may briefly serve a mismatched script and style file.
+This loads a fixed version (`@v1.5.0`), so the script and styles always match. To use a newer version, change the number in both lines to the latest tag under **Releases / Tags**. `@main` also works, but jsDelivr can take up to 12 hours to pick up changes to it, and may briefly serve a mismatched script and style file.
 
 ### Code Block
 
@@ -57,6 +57,7 @@ Put this in a Code Block in the section where you want the rolodex:
   data-ratio="4/5"
   data-swap="1.2"
   data-gap="20"
+  data-images-front="on"
   data-image-link="on"
   data-image-link-target="same"
 
@@ -115,6 +116,7 @@ Leave out any setting to use its default.
 | `data-ratio` | Frame shape, e.g. `4/5`, `1/1`, `16/9` |
 | `data-swap` | Seconds between new images when a collection has more than fit |
 | `data-gap` | Random only: minimum space between images in px |
+| `data-images-front` | `on` = the photos cover every title except the one being hovered, which stays on top. Default `off` (photos sit behind all the titles) |
 | `data-image-link` | `on` = clicking an image opens the same post as its title. Default `off` |
 | `data-image-link-target` | `new` = open in a new tab. Default: same tab |
 

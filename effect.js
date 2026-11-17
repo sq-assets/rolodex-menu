@@ -5,7 +5,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
   const edit=()=>document.body.classList.contains('sqs-edit-mode-active');
   const SWAP=num(ds.swap,1.2)*1000,SPIN=.08*num(ds.spin,1),SCROLL=.04*num(ds.scrollSpin,1),DRAG=(ds.drag||'on')!=='off';
   const COUNT=Math.min(Math.max(Math.round(num(ds.images,3)),1),8),POS=(ds.imagePosition||(COUNT===1?'centre':'random')).toLowerCase(),LINK=(ds.imageLink||'off')==='on',NEWTAB=ds.imageLinkTarget==='new',SIZE=num(ds.imageSize,165),SMAX=Math.max(num(ds.imageSizeMax,SIZE*1.55),SIZE),PGAP=num(ds.gap,20);
-  const css=(p,v)=>v!=null&&v!==''&&el.style.setProperty(p,v);
+  const css=(p,v)=>v!=null&&v!==''&&el.style.setProperty(p,v);const FRONT=(ds.imagesFront||'off')==='on';
   if(ds.height)el.style.height=num(ds.height,640)+'px';
   css('--h',ds.rowHeight&&num(ds.rowHeight,130)+'px');css('--rdx-ts',ds.textSize);css('--rdx-w',ds.fontWeight);css('--rdx-color',ds.textColor);
   if((ds.uppercase||'on')==='off')css('--rdx-case','none');
@@ -40,6 +40,11 @@ document.querySelectorAll('.rolodex').forEach(el=>{
     /* fit: shrink the titles so the longest one (including its hover grow) fits the width; data-text-size is the maximum */
     const fit=()=>{if((ds.fit||'on')==='off')return;el.style.removeProperty('--rdx-fit');const ts=[...drum.querySelectorAll('.rdx-t')],wid=Math.max(...ts.map(t=>t.offsetWidth)),fs=parseFloat(getComputedStyle(ts[0]).fontSize),room=el.clientWidth*num(ds.fitWidth,92)/100/num(ds.grow,1.15);if(wid>room)el.style.setProperty('--rdx-fit',Math.floor(fs*room/wid)+'px')};
     fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,1500);
+    /* images in front: photos sit above the drum, and the active title is copied into a layer above them */
+    let front=null,fc=null,ft=null;if(FRONT){wrap.style.setProperty('--rdx-img-z','2');front=document.createElement('div');fc=document.createElement('div');fc.className='rdx-card';ft=document.createElement('span');ft.className='rdx-t';fc.append(ft);front.append(fc);front.style.display='none';wrap.append(front)}
+    const lift=a=>{if(!front)return;front.className=el.className+' rdx-front';front.style.cssText=el.style.cssText;Object.assign(front.style,{left:el.offsetLeft+'px',top:el.offsetTop+'px',width:el.offsetWidth+'px',height:el.offsetHeight+'px',display:''});
+      const ar=a.getBoundingClientRect(),er=el.getBoundingClientRect();fc.style.top=(ar.top+ar.height/2-er.top)+'px';fc.style.marginTop=(-a.offsetHeight/2)+'px';fc.style.height=a.offsetHeight+'px';ft.textContent=a.c.title;ft.dataset.text=a.c.title;fc.classList.remove('on');a.classList.add('rdx-hide');requestAnimationFrame(()=>fc.classList.add('on'))};
+    const drop=a=>{if(!front)return;fc.classList.remove('on');front.style.display='none';if(a)a.classList.remove('rdx-hide')};
     let rot=0,vel=0,hover=null,active=null,drag=null,moved=0,idx=0,slot=0,timer,count=COUNT,lastY=scrollY;
     const place=(d,w)=>{d.style.width=w+'px';const H=d.offsetHeight;let x,y,k=0;
       if(POS==='centre'||POS==='center'){const j=COUNT>1?.08:0;x=(wrap.offsetWidth-w)/2+(Math.random()-.5)*2*j*wrap.offsetWidth;y=(wrap.offsetHeight-H)/2+(Math.random()-.5)*2*j*wrap.offsetHeight}else do{x=Math.random()*Math.max(0,wrap.offsetWidth-w);y=Math.random()*Math.max(0,wrap.offsetHeight-H);k++}
@@ -47,10 +52,10 @@ document.querySelectorAll('.rolodex').forEach(el=>{
       d.r={x,y,w,h:H};d.style.left=x+'px';d.style.top=y+'px'};
     const pop=(d,delay)=>{d.classList.remove('on');d.r=null;setTimeout(()=>{if(!hover)return;place(d,SIZE+Math.random()*(SMAX-SIZE));
       const i=document.createElement('img');i.src=hover.imgs[idx++%hover.imgs.length];i.alt='';d.replaceChildren(i);d.classList.add('on')},delay)};
-    const stop=()=>{hover=null;if(active){active.classList.remove('on');active=null}clearInterval(timer);pops.forEach(d=>{d.classList.remove('on');d.r=null})};
+    const stop=()=>{hover=null;if(active){drop(active);active.classList.remove('on');active=null}clearInterval(timer);pops.forEach(d=>{d.classList.remove('on');d.r=null})};
     /* hover: the row box (not the growing text) is the target, so nothing flickers */
     drum.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse'||edit()||drag!==null)return;const a=e.target.closest('.rdx-card');if(!a||a===active)return;
-      stop();vel=0;active=a;a.classList.add('on');if(!a.c.imgs.length)return;hover=a.c;idx=0;slot=0;count=Math.min(COUNT,hover.imgs.length);
+      stop();vel=0;active=a;a.classList.add('on');lift(a);if(!a.c.imgs.length)return;hover=a.c;idx=0;slot=0;count=Math.min(COUNT,hover.imgs.length);
       pops.slice(0,count).forEach((d,i)=>pop(d,250+i*150));if(hover.imgs.length>count)timer=setInterval(()=>pop(pops[slot++%count],250),SWAP)});
     el.addEventListener('pointerleave',()=>{el.classList.remove('rdx-over-pop');stop()});
     /* only the centre strip (data-hit-width) is live; moving to the sides lets the drum spin again */
