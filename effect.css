@@ -5,7 +5,7 @@
 .rolodex .rdx-drum{position:absolute;inset:0;transform-style:preserve-3d}
 .rolodex .rdx-card{position:absolute;left:calc((100% - var(--rdx-hit,50%))/2);right:calc((100% - var(--rdx-hit,50%))/2);top:50%;height:var(--h);margin-top:calc(var(--h)/-2);display:flex;align-items:center;justify-content:center;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform-style:preserve-3d;
   font-family:var(--rdx-font,var(--heading-font-font-family,"Helvetica Neue",Helvetica,Arial,sans-serif));font-weight:var(--rdx-w,var(--heading-font-font-weight,700));
-  font-size:var(--rdx-ts,clamp(28px,4vw,72px));line-height:1;letter-spacing:-.02em;text-transform:var(--rdx-case,uppercase);
+  font-size:var(--rdx-fit,var(--rdx-ts,clamp(28px,4vw,72px)));line-height:1;letter-spacing:-.02em;text-transform:var(--rdx-case,uppercase);
   color:var(--rdx-color,#000);text-decoration:none;white-space:nowrap}
 /* the text grows inside a fixed row, and the row (not the text) is the hover target, so nothing jumps */
 .rolodex .rdx-t{display:block;pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:scale(1);transition:transform .45s cubic-bezier(.34,1.56,.64,1),color .3s ease}

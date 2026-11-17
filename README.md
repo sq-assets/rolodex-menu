@@ -83,6 +83,8 @@ Leave out any setting to use its default.
 | `data-font-url` | Link to an uploaded font file (then `data-font-name` is just its name) |
 | `data-font-weight` | `100`–`900` |
 | `data-uppercase` | `on` (default) or `off` |
+| `data-fit` | `on` (default) = titles shrink so the longest one, plus its hover grow, fits the screen. `data-text-size` is then the largest they get. `off` = always use `data-text-size` |
+| `data-fit-width` | How much of the width the longest title may use, in % (default 92) |
 | `data-row-height` | Height of each row in px (default 130). Lower = closer together |
 | `data-spacing` | Extra gap between rows in px (default 30) |
 

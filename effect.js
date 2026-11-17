@@ -37,6 +37,9 @@ document.querySelectorAll('.rolodex').forEach(el=>{
       if(i>=list.length){a.setAttribute('aria-hidden','true');a.tabIndex=-1}
       const t=document.createElement('span');t.className='rdx-t';t.textContent=c.title;a.append(t);
       a.style.transform='rotateX('+(-i*step)+'deg) translateZ('+r+'px)';drum.appendChild(a);c.imgs.slice(0,COUNT).forEach(s=>new Image().src=s)});
+    /* fit: shrink the titles so the longest one (including its hover grow) fits the width; data-text-size is the maximum */
+    const fit=()=>{if((ds.fit||'on')==='off')return;el.style.removeProperty('--rdx-fit');const ts=[...drum.querySelectorAll('.rdx-t')],wid=Math.max(...ts.map(t=>t.offsetWidth)),fs=parseFloat(getComputedStyle(ts[0]).fontSize),room=el.clientWidth*num(ds.fitWidth,92)/100/num(ds.grow,1.15);if(wid>room)el.style.setProperty('--rdx-fit',Math.floor(fs*room/wid)+'px')};
+    fit();addEventListener('resize',fit);document.fonts&&document.fonts.ready.then(fit);setTimeout(fit,1500);
     let rot=0,vel=0,hover=null,active=null,drag=null,moved=0,idx=0,slot=0,timer,count=COUNT,lastY=scrollY;
     const place=(d,w)=>{d.style.width=w+'px';const H=d.offsetHeight;let x,y,k=0;
       if(POS==='centre'||POS==='center'){const j=COUNT>1?.08:0;x=(wrap.offsetWidth-w)/2+(Math.random()-.5)*2*j*wrap.offsetWidth;y=(wrap.offsetHeight-H)/2+(Math.random()-.5)*2*j*wrap.offsetHeight}else do{x=Math.random()*Math.max(0,wrap.offsetWidth-w);y=Math.random()*Math.max(0,wrap.offsetHeight-H);k++}
