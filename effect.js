@@ -12,7 +12,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
   css('--h',ds.rowHeight&&num(ds.rowHeight,130)+'px');css('--rdx-ts',MOB&&ds.textSizeMobile?ds.textSizeMobile:ds.textSize);css('--rdx-w',ds.fontWeight);css('--rdx-color',ds.textColor);
   if((ds.uppercase||'on')==='off')css('--rdx-case','none');
   css('--rdx-grow',ds.grow);css('--rdx-outline',ds.activeOutline&&num(ds.activeOutline,1)+'px');css('--rdx-outline-color',ds.activeOutlineColor);if((ds.glow||'off')==='on')el.classList.add('rdx-glow');css('--rdx-glow-color',ds.glowColor);css('--rdx-glow-size',ds.glowSize&&num(ds.glowSize,24)+'px');css('--rdx-hit',ds.hitWidth&&num(ds.hitWidth,50)+'%');css('--rdx-active',ds.activeColor);css('--rdx-aw',ds.activeFontWeight);
-  if((ds.activeItalic||'off')==='on')css('--rdx-ai','italic');
+  if((ds.activeItalic||'off')==='on')css('--rdx-ai','italic');if(ds.activeCase)css('--rdx-acase',ds.activeCase);
   wrap.style.position='relative';if(ds.ratio)wrap.style.setProperty('--rdx-ratio',ds.ratio);
   /* fonts: an uploaded file (name + url) or a Google font (name only); none = your heading font */
   const font=(name,url,prop)=>{name=(name||'').trim().replace(/["']/g,'');if(!name)return;url=(url||'').trim();

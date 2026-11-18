@@ -10,7 +10,7 @@
 /* the text grows inside a fixed row, and the row (not the text) is the hover target, so nothing jumps */
 .rolodex .rdx-t{display:block;pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:scale(1);transition:transform .45s cubic-bezier(.34,1.56,.64,1),color .3s ease}
 .rolodex .rdx-card.on .rdx-t{transform:scale(var(--rdx-grow,1.15));color:var(--rdx-active,hsl(var(--lightAccent-hsl,329,72%,82%)));
-  font-family:var(--rdx-afont,inherit);font-weight:var(--rdx-aw,inherit);font-style:var(--rdx-ai,normal)}
+  font-family:var(--rdx-afont,inherit);font-weight:var(--rdx-aw,inherit);font-style:var(--rdx-ai,normal);text-transform:var(--rdx-acase,var(--rdx-case,uppercase))}
 .rdx-pop{position:absolute;aspect-ratio:var(--rdx-ratio,4/5);pointer-events:none;z-index:var(--rdx-img-z,0);opacity:0;scale:.6;transition:opacity .25s,scale .45s cubic-bezier(.34,1.56,.64,1)}
 .rdx-pop img,.rdx-pop video{display:block;width:100%;height:100%;object-fit:contain}
 .rdx-pop.on{opacity:1;scale:1}
