@@ -44,6 +44,8 @@ Put this in a Code Block in the section where you want the rolodex:
   data-active-font-url=""
   data-active-italic="off"
   data-active-case=""
+  data-image-border=""
+  data-image-radius=""
   data-grow="1.3"
   data-active-outline="1"
   data-active-outline-color="#111111"
@@ -104,6 +106,8 @@ Leave out any setting to use its default.
 | `data-active-color` | Colour on hover (default: your site's light accent colour) |
 | `data-active-font-name` / `data-active-font-url` / `data-active-font-weight` | Switch to a different font on hover |
 | `data-active-italic` | `on` = italic on hover |
+| `data-image-border` | Border round each image, e.g. `1px solid #000` |
+| `data-image-radius` | Corner rounding in px, e.g. `10` (set `data-ratio` to match your images so the border hugs them) |
 | `data-active-case` | `lowercase`, `uppercase` or `none` (as typed) for the active title only |
 | `data-grow` | How much it grows (`1.3` = 30% bigger) |
 | `data-active-outline` | Outline around the hovered title's letters, in px, e.g. `1` |
