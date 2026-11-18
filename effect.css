@@ -12,7 +12,7 @@
 .rolodex .rdx-card.on .rdx-t{transform:scale(var(--rdx-grow,1.15));color:var(--rdx-active,hsl(var(--lightAccent-hsl,329,72%,82%)));
   font-family:var(--rdx-afont,inherit);font-weight:var(--rdx-aw,inherit);font-style:var(--rdx-ai,normal);text-transform:var(--rdx-acase,var(--rdx-case,uppercase))}
 .rdx-pop{position:absolute;aspect-ratio:var(--rdx-ratio,4/5);pointer-events:none;z-index:var(--rdx-img-z,0);opacity:0;scale:.6;transition:opacity .25s,scale .45s cubic-bezier(.34,1.56,.64,1)}
-.rdx-pop img,.rdx-pop video{display:block;width:100%;height:100%;object-fit:contain;box-sizing:border-box;border:var(--rdx-img-border,0);border-radius:var(--rdx-img-radius,0)}
+.rdx-pop img,.rdx-pop video{display:block;width:100%;height:100%;object-fit:var(--rdx-img-fit,contain);box-sizing:border-box;border:var(--rdx-img-border,0);border-radius:var(--rdx-img-radius,0)}
 .rdx-pop.on{opacity:1;scale:1}
 .rdx-c{position:absolute;z-index:2;pointer-events:none;font:700 14px/1.2 var(--heading-font-font-family,"Helvetica Neue",Helvetica,Arial,sans-serif);text-transform:uppercase;color:#000}
 .rdx-c.tl{top:20px;left:20px}.rdx-c.tr{top:20px;right:20px}.rdx-c.bl{bottom:20px;left:20px}.rdx-c.br{bottom:20px;right:20px}

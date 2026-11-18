@@ -13,7 +13,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
   if((ds.uppercase||'on')==='off')css('--rdx-case','none');
   css('--rdx-grow',ds.grow);css('--rdx-outline',ds.activeOutline&&num(ds.activeOutline,1)+'px');css('--rdx-outline-color',ds.activeOutlineColor);if((ds.glow||'off')==='on')el.classList.add('rdx-glow');css('--rdx-glow-color',ds.glowColor);css('--rdx-glow-size',ds.glowSize&&num(ds.glowSize,24)+'px');css('--rdx-hit',ds.hitWidth&&num(ds.hitWidth,50)+'%');css('--rdx-active',ds.activeColor);css('--rdx-aw',ds.activeFontWeight);
   if((ds.activeItalic||'off')==='on')css('--rdx-ai','italic');if(ds.activeCase)css('--rdx-acase',ds.activeCase);
-  wrap.style.position='relative';if(ds.ratio)wrap.style.setProperty('--rdx-ratio',ds.ratio);if(ds.imageBorder)wrap.style.setProperty('--rdx-img-border',ds.imageBorder);if(ds.imageRadius)wrap.style.setProperty('--rdx-img-radius',num(ds.imageRadius,0)+'px');
+  wrap.style.position='relative';if(ds.ratio)wrap.style.setProperty('--rdx-ratio',ds.ratio);if(ds.imageBorder)wrap.style.setProperty('--rdx-img-border',ds.imageBorder);if(ds.imageRadius)wrap.style.setProperty('--rdx-img-radius',num(ds.imageRadius,0)+'px');if(ds.imageFit)wrap.style.setProperty('--rdx-img-fit',ds.imageFit);
   /* fonts: an uploaded file (name + url) or a Google font (name only); none = your heading font */
   const font=(name,url,prop)=>{name=(name||'').trim().replace(/["']/g,'');if(!name)return;url=(url||'').trim();
     css(prop,'"'+name+'", var(--heading-font-font-family, sans-serif)');
