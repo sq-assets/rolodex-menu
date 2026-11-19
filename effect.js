@@ -60,6 +60,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
     const lift=a=>{if(!front)return;front.className=el.className+' rdx-front';front.style.cssText=el.style.cssText;Object.assign(front.style,{left:el.offsetLeft+'px',top:el.offsetTop+'px',width:el.offsetWidth+'px',height:el.offsetHeight+'px',display:''});
       const ar=a.getBoundingClientRect(),er=el.getBoundingClientRect();fc.style.top=(ar.top+ar.height/2-er.top)+'px';fc.style.marginTop=(-a.offsetHeight/2)+'px';fc.style.height=a.offsetHeight+'px';ft.textContent=a.c.title;ft.dataset.text=a.c.title;fc.classList.remove('on');a.classList.add('rdx-hide');requestAnimationFrame(()=>fc.classList.add('on'))};
     const drop=a=>{if(!front)return;fc.classList.remove('on');front.style.display='none';if(a)a.classList.remove('rdx-hide')};
+    const PDEL=Math.max(0,num(ds.popDelay,80)),PSTAG=Math.max(0,num(ds.popStagger,120));if(ds.popSpeed)wrap.style.setProperty('--rdx-pop-ms',num(ds.popSpeed,450)+'ms');
     let rot=0,vel=0,hover=null,active=null,drag=null,moved=0,idx=0,slot=0,timer,count=COUNT,lastY=scrollY;
     const place=(d,w)=>{d.style.width=w+'px';const H=d.offsetHeight;let x,y,k=0;
       if(POS==='centre'||POS==='center'){const j=COUNT>1?.08:0;x=(wrap.offsetWidth-w)/2+(Math.random()-.5)*2*j*wrap.offsetWidth;y=(wrap.offsetHeight-H)/2+(Math.random()-.5)*2*j*wrap.offsetHeight}else do{x=Math.random()*Math.max(0,wrap.offsetWidth-w);y=Math.random()*Math.max(0,wrap.offsetHeight-H);k++}
@@ -70,7 +71,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
     const stop=()=>{hover=null;if(active){drop(active);active.classList.remove('on');active=null}clearInterval(timer);pops.forEach(d=>{d.classList.remove('on');d.r=null})};
     /* hover: the row box (not the growing text) is the target, so nothing flickers */
     const on=a=>{stop();vel=0;active=a;a.classList.add('on');lift(a);if(!a.c.imgs.length)return;hover=a.c;idx=0;slot=0;count=Math.min(COUNT,hover.imgs.length);
-      pops.slice(0,count).forEach((d,i)=>pop(d,80+i*120));if(hover.imgs.length>count)timer=setInterval(()=>pop(pops[slot++%count],250),SWAP)};
+      pops.slice(0,count).forEach((d,i)=>pop(d,PDEL+i*PSTAG));if(hover.imgs.length>count)timer=setInterval(()=>pop(pops[slot++%count],250),SWAP)};
     /* cursor steering (data-steer="on"): top band spins back, bottom band spins forward, middle band picks titles; data-arrows shows hints */
     const STEER=(ds.steer||'off')==='on'&&!AUTO,SSPD=num(ds.steerSpeed,2.5),DEAD=Math.min(.9,Math.max(0,num(ds.steerZone,.35)));let steer=0,zn=0,aUp=null,aDn=null;
     if((ds.arrows||'off')==='on'){const mk=c=>{const a=document.createElement('div');a.className='rdx-arrow '+c;a.setAttribute('aria-hidden','true');wrap.appendChild(a);return a};aUp=mk('rdx-up');aDn=mk('rdx-dn');if(ds.textColor)wrap.style.setProperty('--rdx-arrow',ds.textColor);if(ds.arrowColor)wrap.style.setProperty('--rdx-arrow',ds.arrowColor)}
