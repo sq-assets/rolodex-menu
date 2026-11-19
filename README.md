@@ -47,6 +47,18 @@ Put this in a Code Block in the section where you want the rolodex:
   data-image-border=""
   data-image-radius=""
   data-image-fit=""
+  data-steer="off"
+  data-steer-speed="2.5"
+  data-steer-zone="0.35"
+  data-arrows="off"
+  data-bubble="off"
+  data-bubble-up="Scroll up"
+  data-bubble-down="Scroll down"
+  data-bubble-bg="#E8A6D6"
+  data-bubble-color="#111111"
+  data-bubble-font=""
+  data-bubble-size="10"
+  data-bubble-uppercase="on"
   data-grow="1.3"
   data-active-outline="1"
   data-active-outline-color="#111111"
@@ -110,6 +122,16 @@ Leave out any setting to use its default.
 | `data-image-border` | Border round each image, e.g. `1px solid #000` |
 | `data-image-radius` | Corner rounding in px, e.g. `10` (set `data-ratio` to match your images so the border hugs them) |
 | `data-image-fit` | `contain` (default, whole image shows) or `cover` (fills the frame, trims edges so a border hugs every image) |
+| `data-steer` | `on` = cursor in the top band spins the wheel back, bottom band spins it forward; the middle band picks titles (desktop only) |
+| `data-steer-speed` | Top steering speed, default `2.5` |
+| `data-steer-zone` | Size of the middle band, 0–0.9 (default `0.35`; bigger = smaller steering zones) |
+| `data-arrows` | `on` = small arrow hints above and below the wheel |
+| `data-bubble` | `on` = a small pill follows the cursor in the steering zones (needs `data-steer="on"`) |
+| `data-bubble-up` / `data-bubble-down` | Bubble wording |
+| `data-bubble-bg` / `data-bubble-color` | Bubble background and text colour |
+| `data-bubble-font` / `data-bubble-size` | Bubble font (default aktiv-grotesk) and size in px (default 10) |
+| `data-bubble-uppercase` | `off` = keep the wording as typed |
+| `data-arrow-color` | Arrow colour (defaults to the title colour) |
 | `data-active-case` | `lowercase`, `uppercase` or `none` (as typed) for the active title only |
 | `data-grow` | How much it grows (`1.3` = 30% bigger) |
 | `data-active-outline` | Outline around the hovered title's letters, in px, e.g. `1` |

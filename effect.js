@@ -71,7 +71,17 @@ document.querySelectorAll('.rolodex').forEach(el=>{
     /* hover: the row box (not the growing text) is the target, so nothing flickers */
     const on=a=>{stop();vel=0;active=a;a.classList.add('on');lift(a);if(!a.c.imgs.length)return;hover=a.c;idx=0;slot=0;count=Math.min(COUNT,hover.imgs.length);
       pops.slice(0,count).forEach((d,i)=>pop(d,250+i*150));if(hover.imgs.length>count)timer=setInterval(()=>pop(pops[slot++%count],250),SWAP)};
-    drum.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse'||edit()||drag!==null||AUTO)return;const a=e.target.closest('.rdx-card');if(a&&a!==active)on(a)});
+    /* cursor steering (data-steer="on"): top band spins back, bottom band spins forward, middle band picks titles; data-arrows shows hints */
+    const STEER=(ds.steer||'off')==='on'&&!AUTO,SSPD=num(ds.steerSpeed,2.5),DEAD=Math.min(.9,Math.max(0,num(ds.steerZone,.35)));let steer=0,zn=0,aUp=null,aDn=null;
+    if((ds.arrows||'off')==='on'){const mk=c=>{const a=document.createElement('div');a.className='rdx-arrow '+c;a.setAttribute('aria-hidden','true');wrap.appendChild(a);return a};aUp=mk('rdx-up');aDn=mk('rdx-dn');if(ds.textColor)wrap.style.setProperty('--rdx-arrow',ds.textColor);if(ds.arrowColor)wrap.style.setProperty('--rdx-arrow',ds.arrowColor)}
+    /* steering bubble (data-bubble="on"): a small label that follows the cursor in the steering zones */
+    let bub=null;const BUP=ds.bubbleUp||'Scroll up',BDN=ds.bubbleDown||'Scroll down';
+    if(STEER&&(ds.bubble||'off')==='on'){bub=document.createElement('div');bub.className='rdx-bubble';bub.setAttribute('aria-hidden','true');document.body.appendChild(bub);
+      const bs=(p,v)=>v&&bub.style.setProperty(p,v);bs('--rdx-bub-bg',ds.bubbleBg);bs('--rdx-bub-color',ds.bubbleColor);bs('--rdx-bub-font',ds.bubbleFont);bs('--rdx-bub-size',ds.bubbleSize&&num(ds.bubbleSize,10)+'px');if((ds.bubbleUppercase||'on')==='off')bub.style.textTransform='none'}
+    if(STEER){el.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||edit()||drag!==null)return;const b=el.getBoundingClientRect();zn=((e.clientY-b.top)/b.height-.5)*2;const m=Math.abs(zn);
+      if(m>DEAD){steer=Math.sign(zn)*Math.pow(Math.min(1,(m-DEAD)/(1-DEAD)),1.3)*SSPD;if(active)stop()}else steer=0;if(aUp){aUp.classList.toggle('on',steer<0);aDn.classList.toggle('on',steer>0)}if(bub){if(steer){bub.textContent=steer<0?BUP:BDN;bub.style.left=e.clientX+16+'px';bub.style.top=e.clientY+16+'px';bub.classList.add('on')}else bub.classList.remove('on')}});
+      el.addEventListener('pointerleave',()=>{steer=0;zn=0;if(aUp){aUp.classList.remove('on');aDn.classList.remove('on')}if(bub)bub.classList.remove('on')})}
+    drum.addEventListener('pointerover',e=>{if(e.pointerType!=='mouse'||edit()||drag!==null||AUTO)return;if(STEER&&Math.abs(zn)>DEAD)return;const a=e.target.closest('.rdx-card');if(a&&a!==active)on(a)});
     el.addEventListener('pointerleave',()=>{el.classList.remove('rdx-over-pop');stop()});
     /* only the centre strip (data-hit-width) is live; moving to the sides lets the drum spin again */
     /* clickable images (data-image-link="on"): the drum sits over them, so check where the cursor is */
@@ -96,7 +106,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
       el.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY});
       el.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))cycle(dx<0?1:-1)});
       el.addEventListener('click',e=>{e.preventDefault();if(active)location.href=active.c.url},true)}
-    (function loop(){if(AUTO)rot+=(tgt-rot)*.12;else if(drag===null){vel*=.92;rot+=vel+(hover||active||!seen()?0:SPIN)}
+    (function loop(){if(AUTO)rot+=(tgt-rot)*.12;else if(drag===null){vel*=.92;rot+=vel+steer+(hover||active||steer||!seen()?0:SPIN)}
       drum.style.transform='translateZ('+(-R)+'px) rotateX('+rot+'deg)';requestAnimationFrame(loop)})();
   }).catch(()=>{});
 });
