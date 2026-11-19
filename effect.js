@@ -60,6 +60,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
     const lift=a=>{if(!front)return;front.className=el.className+' rdx-front';front.style.cssText=el.style.cssText;Object.assign(front.style,{left:el.offsetLeft+'px',top:el.offsetTop+'px',width:el.offsetWidth+'px',height:el.offsetHeight+'px',display:''});
       const ar=a.getBoundingClientRect(),er=el.getBoundingClientRect();fc.style.top=(ar.top+ar.height/2-er.top)+'px';fc.style.marginTop=(-a.offsetHeight/2)+'px';fc.style.height=a.offsetHeight+'px';ft.textContent=a.c.title;ft.dataset.text=a.c.title;fc.classList.remove('on');a.classList.add('rdx-hide');requestAnimationFrame(()=>fc.classList.add('on'))};
     const drop=a=>{if(!front)return;fc.classList.remove('on');front.style.display='none';if(a)a.classList.remove('rdx-hide')};
+    const PRE={};
     const PDEL=Math.max(0,num(ds.popDelay,80)),PSTAG=Math.max(0,num(ds.popStagger,120));if(ds.popSpeed)wrap.style.setProperty('--rdx-pop-ms',num(ds.popSpeed,450)+'ms');
     let rot=0,vel=0,hover=null,active=null,drag=null,moved=0,idx=0,slot=0,timer,count=COUNT,lastY=scrollY;
     const place=(d,w)=>{d.style.width=w+'px';const H=d.offsetHeight;let x,y,k=0;
@@ -67,7 +68,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
       while(POS==='random'&&k<60&&pops.some(o=>o!==d&&o.r&&x<o.r.x+o.r.w+PGAP&&x+w+PGAP>o.r.x&&y<o.r.y+o.r.h+PGAP&&y+H+PGAP>o.r.y));
       d.r={x,y,w,h:H};d.style.left=x+'px';d.style.top=y+'px'};
     const pop=(d,delay)=>{d.classList.remove('on');d.r=null;setTimeout(()=>{if(!hover)return;place(d,SIZE+Math.random()*(SMAX-SIZE));
-      const i=document.createElement('img');i.src=hover.imgs[idx++%hover.imgs.length];i.alt='';d.replaceChildren(i);d.classList.add('on')},delay)};
+      const u=hover.imgs[idx++%hover.imgs.length];let i=PRE[u];if(!i||i.parentNode&&i.parentNode!==d){i=document.createElement('img');i.src=u}i.alt='';i.draggable=false;d.replaceChildren(i);d.classList.add('on')},delay)};
     const stop=()=>{hover=null;if(active){drop(active);active.classList.remove('on');active=null}clearInterval(timer);pops.forEach(d=>{d.classList.remove('on');d.r=null})};
     /* hover: the row box (not the growing text) is the target, so nothing flickers */
     const on=a=>{stop();vel=0;active=a;a.classList.add('on');lift(a);if(!a.c.imgs.length)return;hover=a.c;idx=0;slot=0;count=Math.min(COUNT,hover.imgs.length);
@@ -108,7 +109,7 @@ document.querySelectorAll('.rolodex').forEach(el=>{
       el.addEventListener('pointerup',e=>{if(sx===null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy))cycle(dx<0?1:-1)});
       el.addEventListener('click',e=>{e.preventDefault();if(active)location.href=active.c.url},true)}
     /* preload all images when the wheel comes near the screen, so they appear instantly on hover */
-    if((ds.preload||'on')!=='off'){let done=false;const go=()=>{if(done)return;done=true;const us=[...new Set(cards.flatMap(c=>c.imgs))];let k=0;const next=()=>{if(k>=us.length)return;const i=new Image();i.decoding='async';i.onload=i.onerror=next;i.src=us[k++]};next();next()};
+    if((ds.preload||'on')!=='off'){let done=false;const go=()=>{if(done)return;done=true;const us=[...new Set(cards.flatMap(c=>c.imgs))];let k=0;const next=()=>{if(k>=us.length)return;const u=us[k++],i=new Image();i.decoding='async';i.onload=i.onerror=next;i.src=u;PRE[u]=i};next();next()};
       if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){io.disconnect();go()}},{rootMargin:'100% 0px'});io.observe(el)}else go()}
     (function loop(){if(AUTO)rot+=(tgt-rot)*.12;else if(drag===null){vel*=.92;rot+=vel+steer+(hover||active||steer||!seen()?0:SPIN)}
       drum.style.transform='translateZ('+(-R)+'px) rotateX('+rot+'deg)';requestAnimationFrame(loop)})();
