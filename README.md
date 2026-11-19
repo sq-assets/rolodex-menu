@@ -51,6 +51,7 @@ Put this in a Code Block in the section where you want the rolodex:
   data-steer-speed="2.5"
   data-steer-zone="0.35"
   data-arrows="off"
+  data-preload="on"
   data-bubble="off"
   data-bubble-up="Scroll up"
   data-bubble-down="Scroll down"
@@ -126,6 +127,7 @@ Leave out any setting to use its default.
 | `data-steer-speed` | Top steering speed, default `2.5` |
 | `data-steer-zone` | Size of the middle band, 0–0.9 (default `0.35`; bigger = smaller steering zones) |
 | `data-arrows` | `on` = small arrow hints above and below the wheel |
+| `data-preload` | `on` (default) downloads every image as the wheel comes near the screen, so they appear instantly; `off` loads them on first hover |
 | `data-bubble` | `on` = a small pill follows the cursor in the steering zones (needs `data-steer="on"`) |
 | `data-bubble-up` / `data-bubble-down` | Bubble wording |
 | `data-bubble-bg` / `data-bubble-color` | Bubble background and text colour |
